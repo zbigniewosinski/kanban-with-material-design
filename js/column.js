@@ -16,14 +16,17 @@ function Column(id, name, backgroundColor) {
 		const $columnId = $('<div>').addClass('id').text(id);
 		const $columnCardList = $('<ul>').addClass('column-card-list');
 		// const $columnNav = $('<div>').addClass('nav-column');
-		const $columnNav = $('<div>').addClass('column-nav dropdown');
+		const $columnNav = $('<div>').addClass('column-nav btn-group');
+		const $columnNavDropdownToggle = $('<button>').addClass('btn btn-sm dropdown-toggle').attr('data-toggle', 'dropdown')
+			.attr('type', 'button');
+		const $columnNavDropdownMenu = $('<ul>').addClass('dropdown-menu dropdown-menu-right');
 		// const $btnColumnDelete = $('<button>').addClass('btn btn-delete').text('x');
 		// const $btnColumnEdit = $('<a>').addClass('btn btn-xs btn-primary btn-edit')
 		// 	.append($('<i>').addClass('material-icons md-18').text('edit'));
 		// const $btnColumnDelete = $('<a>').addClass('btn btn-xs btn-delete')
 		// 	.append($('<i>').addClass('material-icons md-18').text('delete'));
-		const $btnColumnEdit = $('<a>').append($('<i>').addClass('material-icons md-18').text('edit'));
-		const $btnColumnDelete = $('<a>').append($('<i>').addClass('material-icons md-18').text('delete'));
+		const $btnColumnEdit = $('<a href="#">').append($('<i>').addClass('material-icons md-18').text('edit'));
+		const $btnColumnDelete = $('<a href="#">').append($('<i>').addClass('material-icons md-18').text('delete'));
 
 
 		// const $columnColorPicker = $('<input>').addClass('btn color-picker').attr('type', 'color');
@@ -87,24 +90,38 @@ function Column(id, name, backgroundColor) {
 		// $columnNav.append($btnColumnEdit).
 		// 	append($btnColumnDelete);
 
-		$columnNav.append( $('<button>').addClass('btn dropdown-toggle').attr('data-toggle', 'dropdown')
-			.attr('type', 'button') );
-		$columnNav.find('button').append($('<i>').addClass('material-icons').text('more_vert'));
+		// $columnNav.append( $('<button>').addClass('btn dropdown-toggle').attr('data-toggle', 'dropdown')
+		// 	.attr('type', 'button') ).attr('data-target', '#');
+		// $columnNav.find('button').append($('<i>').addClass('material-icons').text('more_vert'));
+		
+		// $columnNav.hover( () => {
+		// 	$columnNavDropdownMenu.dropdown('toggle');
+		// });
+		// $columnNavDropdownToggle.click( () => {
+			
+		// });
+		
+		$columnNavDropdownToggle.append($('<i>').addClass('material-icons').text('more_vert'));
+		$columnNavDropdownMenu.append($('<li>').append($btnColumnEdit));
+		$columnNavDropdownMenu.append($('<li>').append($btnColumnDelete));
+		$columnNav.append($columnNavDropdownToggle).append($columnNavDropdownMenu);
+		
 		$pseudoCard.append($textareaAddCard).append($btnAddCard);
-		$column.append($columnBody);
 		$columnBody
 			.append($columnTitle)
 			.append($columnId)
 			.append($columnNav)
 			.append($pseudoCard)
 			.append($columnCardList);
+		$column.append($columnBody);
 
-		$columnNav.append($('<ul>').addClass('dropdown-menu').append($('<li>').append($btnColumnEdit)).
-			append($('<li>').append($btnColumnDelete)));
+		// $columnNav.append($('<ul>').addClass('dropdown-menu').append($('<li>').append($btnColumnEdit)).
+		// 	append($('<li>').append($btnColumnDelete)));
 
-		$columnNav.find('button').hover( () => {
-			$columnNav.find('.dropdown-menu').dropdown('toggle');
-		})
+		// $columnNav.find('button').hover( () => {
+		// 	$columnNav.find('.dropdown-menu').dropdown('toggle');
+		// })
+
 
 		return $column;
 	};

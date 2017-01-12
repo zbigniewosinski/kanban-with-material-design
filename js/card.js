@@ -4,6 +4,7 @@ function Card(id, description, parentColumnId) {
 	var self = this;
 
 	this.id = id;
+	console.log(id);
 	this.description = description || '';
 	this.parentColumnId = parentColumnId;
 	this.$element = createCard();
@@ -11,9 +12,10 @@ function Card(id, description, parentColumnId) {
 		const $card = $('<li>').addClass('panel panel-default card').attr('id',self.id);
 		const $cardId = $('<div>').addClass('id').text(self.id);
 		const $cardDescription = $('<p>').addClass('panel-body card-description').text(self.description);
-		const $btnCardEdit = $('<a>').addClass('btn btn-xs btn-primary btn-edit')
+		const $cardBtnGroup = $('<p>').addClass('bs-component btn-group-sm card-buttons');
+		const $btnCardEdit = $('<a>').addClass('btn btn-primary btn-fab btn-edit')
 			.append($('<i>').addClass('material-icons md-18').text('edit'));
-		const $btnCardDelete = $('<a>').addClass('btn btn-xs btn-delete')
+		const $btnCardDelete = $('<a>').addClass('btn btn-default btn-fab btn-delete')
 			.append($('<i>').addClass('material-icons md-18').text('delete'));
 
 		$btnCardDelete.click( () => {
@@ -26,8 +28,10 @@ function Card(id, description, parentColumnId) {
 			self.editCard();
 		});
 
-		$card.append($btnCardDelete)
-			.append($btnCardEdit)
+		$cardBtnGroup.append($btnCardEdit).append($btnCardDelete);
+		// $card.append($btnCardDelete)
+		// 	.append($btnCardEdit)
+		$card.append($cardBtnGroup)
 			.append($cardId)
 			.append($cardDescription);
 
